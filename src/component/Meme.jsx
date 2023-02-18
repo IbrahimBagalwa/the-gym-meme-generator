@@ -76,7 +76,7 @@ const Meme = () => {
         </Draggable>
         <img
           src={meme.randomImg}
-          alt="images"
+          alt="random"
           className="w-full h-[268px] rounded-md object-cover"
         />
         <Draggable bounds="parent">
