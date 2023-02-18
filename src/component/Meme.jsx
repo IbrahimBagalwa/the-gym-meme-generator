@@ -37,9 +37,11 @@ const Meme = () => {
     const data = await res.json();
     setAllMemes(data.data.memes);
   };
+
   useEffect(() => {
     fetchMemes();
   }, []);
+
   return (
     <div className="bg-white px-4 pb-14">
       <div className="flex items-center justify-between pt-4">
