@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import download from "downloadjs";
 import { toPng } from "html-to-image";
-import Draggable from "react-draggable";
+import DraggableComponent from "./DraggableComponent";
+import Input from "./Input";
+import Button from "./Button";
+
 const URL = "https://api.imgflip.com/get_memes";
 const Meme = () => {
   const [meme, setMeme] = useState({
@@ -43,54 +46,19 @@ const Meme = () => {
   }, []);
 
   return (
-    <div className="bg-white px-4 pb-14">
-      <div className="flex items-center justify-between pt-4">
-        <input
-          name="takeMoney"
-          value={meme.takeMoney}
-          onChange={handleChange}
-          type="text"
-          className="w-[230px] h-9 p-2 rounded-md border border-[#D5D4D8]"
-          placeholder="Shut up"
-        />
-        <input
-          name="shutup"
-          value={meme.shutup}
-          onChange={handleChange}
-          type="text"
-          className="w-[230px] h-9 p-2 rounded-md border border-[#D5D4D8]"
-          placeholder="and take my money"
-        />
-      </div>
-      <button
-        onClick={showImages}
-        className="bg-[#A426D0] font-bold text-base text-white py-2 rounded-md w-full mt-2 mb-6"
-      >
-        Get a new meme image 🖼
-      </button>
-      <div className="relative" ref={imgRef}>
-        <Draggable bounds="parent">
-          <span className="absolute text-center -translate-x-1/2 mt-[15px] uppercase top-0 text-white font-bold text-4xl">
-            {meme.shutup}
-          </span>
-        </Draggable>
-        <img
-          src={meme.randomImg}
-          alt="random"
-          className="w-full h-[268px] rounded-md object-cover"
-        />
-        <Draggable bounds="parent">
-          <span className="absolute text-center -translate-x-1/2 mt-[15px] uppercase bottom-0 text-white font-bold text-4xl">
-            {meme.takeMoney}
-          </span>
-        </Draggable>
-      </div>
-      <button
-        onClick={downloadImage}
-        className="bg-[#A426D0] font-bold text-base text-white py-2 rounded-md w-full mt-6"
-      >
-        Download Image
-      </button>
+    <div className="px-4 bg-white pb-14">
+      <Input handleChange={handleChange} meme={meme} />
+      <Button
+        showImages={showImages}
+        title="Get a new meme image 🖼"
+        styles="mt-2 mb-6"
+      />
+      <DraggableComponent meme={meme} imgRef={imgRef} />
+      <Button
+        showImages={downloadImage}
+        title="Get a new meme image 🖼"
+        styles="mt-6"
+      />
     </div>
   );
 };
